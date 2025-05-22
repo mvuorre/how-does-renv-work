@@ -1,0 +1,15 @@
+---
+title: "How does renv work"
+---
+
+
+```{r}
+library(tidyverse)
+library(brms)
+options(
+  brms.backend = Sys.getenv("BRMS_BACKEND", "rstan"),
+  brms.threads = as.numeric(Sys.getenv("BRMS_THREADS"), 1),
+  mc.cores = as.numeric(Sys.getenv("MAX_CORES"), 4)
+)
+getOption("brms.backend")
+```

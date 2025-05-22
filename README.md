@@ -1,18 +1,8 @@
-# how-does-renv-work
+# How does renv work?
 
-I always use renv. I don't know how to use renv. Here I figure it out.
+My reproducible manuscripts are always some combination of [R](https://cran.r-project.org/), [Quarto](https://quarto.org/), [GNU Make](https://www.gnu.org/software/make/), and [renv](https://rstudio.github.io/renv/) to take care of R dependencies. A key R dep for me is [cmdstanr](https://mc-stan.org/cmdstanr/). This repo includes reusable code snippets to make all those work together:
 
-Problems:
-
-- [ ] Use renv (properly) with make
-- [ ] Use renv with cmdstanr
-- [ ] Make renv not complain about R package X in a cloned project
-    - [ ] knitr
-    - [ ] rmarkdown
-    - [ ] yaml
-
-
-What I'm doing to test
-
-- A mock analysis in `index.qmd`
-- Test a cloned project in `tests/`
+- `Makefile`
+    - Run `make` to bootstrap R dependencies with renv and render the Quarto project
+- `index.qmd`
+    - Manuscript source with snippets that ensure cmdstanr works (if requested in an environment file)

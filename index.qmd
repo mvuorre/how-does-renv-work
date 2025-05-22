@@ -4,12 +4,28 @@ title: "How does renv work"
 
 
 ```{r}
-library(tidyverse)
+# Packages (explicitly) required in analysis
+library(ggplot2)
 library(brms)
+
+# cmdstanr package possibly required by environment variable
+if (Sys.getenv("BRMS_BACKEND") == "cmdstanr") library(cmdstanr)
 options(
   brms.backend = Sys.getenv("BRMS_BACKEND", "rstan"),
   brms.threads = as.numeric(Sys.getenv("BRMS_THREADS"), 1),
   mc.cores = as.numeric(Sys.getenv("MAX_CORES"), 4)
 )
 getOption("brms.backend")
+```
+
+
+```{r}
+set.seed(101)
+dat <- data.frame(y = rnorm(10), x = runif(10))
+fit <- brm(
+  y ~ x,
+  data = dat,
+  chains = 0,
+  file = "fit"
+)
 ```
